@@ -19,10 +19,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void createEntry(User newEntry) {
-        newEntry.setPassword(passwordEncoder.encode(newEntry.getPassword()));
-        newEntry.setRoles(List.of("USER"));
-        userRepository.save(newEntry);
+    public boolean createEntry(User newEntry) {
+        try {
+            newEntry.setPassword(passwordEncoder.encode(newEntry.getPassword()));
+            newEntry.setRoles(List.of("USER"));
+            userRepository.save(newEntry);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 
     public void createAdminEntry(User newEntry) {

@@ -3,30 +3,53 @@ package com.prateek.journalApp.service;
 
 import com.prateek.journalApp.entity.User;
 import com.prateek.journalApp.repository.UserRepository;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.*;
+import org.junit.jupiter.params.provider.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class UserServiceTests {
 
-    @Mock
+    @Autowired
+    private UserService userService;
+
+    @MockitoBean
     private UserRepository userRepository;
 
     @Test
+    @DisplayName("Should return user when username exists")
     public void testFindByUserName() {
-        when(userRepository.findByUserName(ArgumentMatchers.anyString())).thenReturn(User.builder().userName("Ram").password("Ram@123").roles(List.of("USER")).build());
-        User user = userRepository.findByUserName("Ram");
-        assertEquals("Ram",user.getUserName());
+        User expectedUser = User.builder()
+                .userName("Ram")
+                .password("Ram@123")
+                .roles(List.of("USER"))
+                .build();
+        when(userRepository.findByUserName("Ram")).thenReturn(expectedUser);
+
+        User user = userService.findByUserName("Ram");
+
+        assertNotNull(user);
+        assertEquals(expectedUser.getUserName(), user.getUserName());
+        assertEquals(expectedUser.getPassword(), user.getPassword());
+        assertTrue(user.getRoles().contains("USER"));
+
+        verify(userRepository).findByUserName("Ram");
+    }
+
+    @ParameterizedTest
+    @ArgumentsSource(UserArgumentsProvider.class)
+    @DisplayName("Should return true when user is created")
+    public void testCreateEntry(User user) {
+        assertTrue(userService.createEntry(user));
     }
 
     @ParameterizedTest
