@@ -15,6 +15,7 @@ import java.util.Optional;
 public class UserService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Autowired
     private UserRepository userRepository;
 
