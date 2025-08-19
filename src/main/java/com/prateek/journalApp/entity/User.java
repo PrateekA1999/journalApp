@@ -31,4 +31,11 @@ public class User {
     private List<JournalEntry> journalEntries = new ArrayList<>();
 
     private List<String> roles;
+
+    public List<JournalEntry> getJournalEntries() {
+        if (journalEntries == null) {
+            journalEntries = new ArrayList<>();
+        }
+        return journalEntries;
+    }
 }

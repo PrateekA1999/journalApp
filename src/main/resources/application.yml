@@ -1,3 +1,19 @@
 spring:
   profiles:
     active: dev
+
+#logging:
+#  level:
+#    com:
+#      prateek:
+#        journalApp: DEBUG
+
+#logging:
+#  level:
+#    com:
+#      prateek:
+#        journalApp: TRACE
+
+#logging:
+#  level:
+#    root: OFF
