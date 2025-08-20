@@ -27,7 +27,7 @@ public class UserController {
             existingUser.setUserName(user.getUserName());
             existingUser.setPassword(user.getPassword());
             userService.createEntry(existingUser);
-            return new ResponseEntity<User>(existingUser, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(existingUser, HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
