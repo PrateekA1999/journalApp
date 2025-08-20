@@ -14,6 +14,8 @@ htmlReport/
 .settings
 .springBeans
 .sts4-cache
+*.yml
+*.logs
 
 ### IntelliJ IDEA ###
 .idea
