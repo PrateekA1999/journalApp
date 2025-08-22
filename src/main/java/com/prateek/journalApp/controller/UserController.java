@@ -18,7 +18,6 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user) {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
 
@@ -34,10 +33,10 @@ public class UserController {
 
     @DeleteMapping
     public ResponseEntity<?> deleteUser() {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         userService.deleteByUserName(userName);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

@@ -5,7 +5,6 @@
     <property name="PID" value="${PID:-unknown}" />
 
     <appender name = "myConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-        <withJansi>true</withJansi>
         <encoder>
             <pattern>
                 %d{yy-MM-dd HH:mm:ss.SSS} %highlightex(%-5level) %property{PID} --- %boldBlue([%thread])  %boldMagenta([%logger{36}])  : %highlightex(%msg) %n %highlightex(%throwable)
