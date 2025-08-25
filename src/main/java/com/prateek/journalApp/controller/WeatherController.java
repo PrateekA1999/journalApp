@@ -21,6 +21,13 @@ public class WeatherController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
 
+        /*
+        HttpHeaders hp = new HttpHeaders();
+        hp.add("Testing", "Testing");
+        User us = User.builder().userName("Testing").password("Testing").build();
+        HttpEntity<User> he = new HttpEntity<>(us, hp);
+        s*/
+
         String tempratureStatement = "";
         WeatherResponse response = weatherService.getWeather(city);
         if (response != null) {
