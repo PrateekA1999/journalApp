@@ -21,4 +21,3 @@ server:
 weather:
   api:
     key: a756799713fd4c6b84162443252208
-    url: http://api.weatherapi.com/v1/current.json

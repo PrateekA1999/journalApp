@@ -1,5 +1,6 @@
 package com.prateek.journalApp.controller;
 
+import com.prateek.journalApp.cache.AppCache;
 import com.prateek.journalApp.entity.User;
 import com.prateek.journalApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AppCache appCache;
+
     @GetMapping("/all-users")
     public ResponseEntity<?> getAllUsers() {
         List<User> users = userService.getAll();
@@ -28,5 +32,10 @@ public class AdminController {
     @PostMapping("/create-admin-user")
     public void createAdminUser(@RequestBody User user) {
         userService.createAdminEntry(user);
+    }
+
+    @PatchMapping("/clear-app-cache")
+    public void clearAppCache() {
+        appCache.init();
     }
 }
