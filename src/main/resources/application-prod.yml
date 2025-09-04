@@ -12,6 +12,17 @@ spring:
     user:
       name: user
       password: password
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: prateek.aga.1999@gmail.com
+    password: yotc nfjf ludc fcpc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 server:
   port: 8081
