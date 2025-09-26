@@ -4,6 +4,10 @@ spring:
   main:
     allow-circular-references: true
   data:
+    redis:
+      host: redis-14889.crce206.ap-south-1-1.ec2.redns.redis-cloud.com
+      port: 14889
+      password: 88rmewqsp53gF3Zlxx5G2Lu6OdwvWRf2
     mongodb:
       uri: mongodb+srv://prateekaga1999:IjAHfjHQEkg3DtNi@cluster0.ek2gb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       database: journaldb

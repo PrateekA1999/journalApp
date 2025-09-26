@@ -1,5 +1,6 @@
 package com.prateek.journalApp.entity;
 
+import com.prateek.journalApp.enums.Sentiment;
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -19,4 +20,5 @@ public class JournalEntry {
     private String content;
 
     private LocalDateTime date;
+    private Sentiment sentiment;
 }

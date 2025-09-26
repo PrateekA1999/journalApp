@@ -25,16 +25,28 @@ public class WeatherService {
     @Autowired
     private AppCache appCache;
 
+    @Autowired
+    private RedisService redisService;
+
     public WeatherResponse getWeather(String city) {
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(appCache.APP_CACHE.get(AppCache.keys.WEATHER_API_URL.toString()))
-                .queryParam(Placeholders.API_KEY, apiKey)
-                .queryParam(Placeholders.QUERY, city)
-                .queryParam(Placeholders.AQI, "no");
+        WeatherResponse weatherResponse = redisService.getValue("Weather_of_" + city, WeatherResponse.class);
+        if (weatherResponse != null) {
+            return weatherResponse;
+        } else {
+            UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(appCache.APP_CACHE.get(AppCache.keys.WEATHER_API_URL.toString()))
+                    .queryParam(Placeholders.API_KEY, apiKey)
+                    .queryParam(Placeholders.QUERY, city)
+                    .queryParam(Placeholders.AQI, "no");
 
-        URI url = builder.build(true).toUri();
+            URI url = builder.build(true).toUri();
 
-        ResponseEntity<WeatherResponse> response = restTemplate.exchange(url, HttpMethod.GET, null, WeatherResponse.class);
-        return response.getBody();
+            ResponseEntity<WeatherResponse> response = restTemplate.exchange(url, HttpMethod.GET, null, WeatherResponse.class);
+            WeatherResponse body = response.getBody();
+            if (body != null) {
+                redisService.setValue("Weather_of_" + city, body, 300L);
+            }
+            return body;
+        }
     }
 }

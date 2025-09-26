@@ -16,4 +16,14 @@ spring:
 
 #logging:
 #  level:
-#    root: OFF
+#    root: DEBUG
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        boot:
+#          context:
+#            config: DEBUG
+#        core:
+#          env: TRACE
